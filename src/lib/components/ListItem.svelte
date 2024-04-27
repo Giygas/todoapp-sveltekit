@@ -21,7 +21,6 @@
 	};
 
 	$: text;
-	$: console.log(text);
 </script>
 
 <div class="flex w-full items-center gap-5 px-5">

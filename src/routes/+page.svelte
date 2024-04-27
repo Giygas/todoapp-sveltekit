@@ -53,6 +53,11 @@
 		update();
 	}
 
+	$: if (!editMode) {
+		// New item input get focus when exiting edit mode
+		document.getElementById('new-item')?.focus();
+	}
+
 	let newItem: string | null = null;
 
 	let editMode = false;
@@ -73,26 +78,26 @@
 </Button>
 
 <div class="container max-w-[800px] rounded-lg p-5 sm:p-16">
-	<h1 class="text-center text-6xl font-bold">Todo List</h1>
+	<h1 class="text-center text-4xl font-bold sm:text-6xl">Todo List</h1>
 
-	<div class="flex justify-between">
+	<div class="flex justify-between gap-3 py-5 sm:flex-row">
+		{#if items.length == 0}
+			<div class=" flex justify-center text-nowrap py-5 md:justify-end md:pr-10">
+				<p class="todo-title">Nothing to do</p>
+			</div>
+		{:else if itemsLeft.length != 0}
+			<div class="flex justify-center text-nowrap py-5 md:justify-end md:pr-10">
+				<p class="todo-title">You have {itemsLeft.length} items left</p>
+			</div>
+		{:else}
+			<div class="flex justify-center text-nowrap py-5 md:justify-end md:pr-10">
+				<p class="todo-title">All done !</p>
+			</div>
+		{/if}
 		<div class="flex items-center space-x-2">
 			<Switch id="edit-mode" bind:checked={editMode} />
 			<Label for="edit-mode">Edit Mode</Label>
 		</div>
-		{#if items.length == 0}
-			<div class="flex justify-center text-nowrap py-5 md:justify-end md:pr-10">
-				<p class="text-center text-2xl font-bold">Nothing to do</p>
-			</div>
-		{:else if itemsLeft.length != 0}
-			<div class="flex justify-center text-nowrap py-5 md:justify-end md:pr-10">
-				<p class="text-center text-2xl font-bold">You have {itemsLeft.length} items left</p>
-			</div>
-		{:else}
-			<div class="flex justify-center text-nowrap py-5 md:justify-end md:pr-10">
-				<p class="text-center text-2xl font-bold">All done !</p>
-			</div>
-		{/if}
 	</div>
 
 	<ul class="flex flex-col gap-3">
@@ -127,6 +132,8 @@
 		on:submit={addItem}
 	>
 		<Input
+			id="new-item"
+			autofocus
 			bind:value={newItem}
 			type="text"
 			name="New Item"
@@ -136,3 +143,9 @@
 		<Button type="submit">Create</Button>
 	</form>
 </div>
+
+<style>
+	.todo-title {
+		@apply text-center text-lg font-bold sm:text-2xl;
+	}
+</style>
