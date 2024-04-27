@@ -98,8 +98,7 @@
 	<ul class="flex flex-col gap-3">
 		{#each items as item, i (item.id)}
 			<li
-				in:fade|global={{ duration: 700 }}
-				out:slide|global={{ duration: 500 }}
+				transition:fade={{ duration: 500 }}
 				class="my-auto flex min-h-14 items-center rounded-md bg-secondary/40 align-middle shadow-md"
 			>
 				<ListItem
