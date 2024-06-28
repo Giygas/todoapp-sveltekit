@@ -44,7 +44,6 @@
 	{:else}
 		<form
 			on:submit|preventDefault={() => {
-				toggleModify();
 				saveItem();
 			}}
 			class="flex-1"
