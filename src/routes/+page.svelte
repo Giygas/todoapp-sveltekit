@@ -8,11 +8,12 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Switch } from '$lib/components/ui/switch/index.js';
 	import { toast } from 'svelte-sonner';
-	import { fade, slide } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 	import Label from '$lib/components/ui/label/label.svelte';
 	import Sun from 'svelte-radix/Sun.svelte';
 	import Moon from 'svelte-radix/Moon.svelte';
 	import { toggleMode } from 'mode-watcher';
+
 	let items: Array<TodoItem> = [];
 
 	_app.subscribe((value) => {
@@ -55,7 +56,9 @@
 
 	$: if (!editMode) {
 		// New item input get focus when exiting edit mode
-		document.getElementById('new-item')?.focus();
+		if (browser) {
+			document.getElementById('new-item')?.focus();
+		}
 	}
 
 	let newItem: string | null = null;

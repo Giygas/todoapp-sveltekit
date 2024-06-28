@@ -5,11 +5,11 @@ const app_name = 'todoapp-items';
 
 export function load() {
 	if (!browser) {
-		return [{}];
+		return [];
 	}
 
 	if (!localStorage[app_name]) {
-		return [{}];
+		return [];
 	}
 
 	return JSON.parse(localStorage[app_name]);

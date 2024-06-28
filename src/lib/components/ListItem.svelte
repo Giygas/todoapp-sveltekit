@@ -5,7 +5,7 @@
 	import Icon from '@iconify/svelte';
 	import { fade } from 'svelte/transition';
 
-	export let text = 'Hello World';
+	export let text: string;
 	export let completed = false;
 	export let deleteItem = () => {};
 	export let id = 0;
